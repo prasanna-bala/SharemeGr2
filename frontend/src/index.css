@@ -1,0 +1,15 @@
+ @tailwind base;
+ @tailwind component;
+ @tailwind utilities;
+
+ body {
+
+   font-family: 'Lato';
+
+ }
+
+ .hide-scrollbar::-webkit-scrollbar{
+
+   display: none;
+   
+ }
