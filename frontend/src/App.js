@@ -1,11 +1,16 @@
 
+//import { Component } from 'react';
+import {Routes ,Route } from 'react-router-dom';
 import './App.css';
+import Login from './components/Login';
+import Home from './components/Home';
 
 function App() {
   return (
-    <h1 className="text-9xl font-bold underline ">
-      hello world  
-    </h1>
+    <Routes>
+      <Route path= 'login' element= {<Login /> }/>
+      <Route path= '/*' element= {<Home /> }/>
+    </Routes>
   )
 }
 
