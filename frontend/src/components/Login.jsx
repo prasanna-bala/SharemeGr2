@@ -4,12 +4,25 @@ import logo from '../asset/logowhite.png';
 import GoogleLogin from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-
+import { client } from '../client';
 
 const Login = ()=>{
+  const navigate = useNavigate();
   const responseGoogle = (response) => {
     localStorage.setItem('user', JSON.stringify(response.profileObj))
-    
+    console.log(response.profileObj)
+    const {name, googleId, imageUrl} = response.profileObj;
+    const doc = {
+      _id: googleId,
+      _type: 'user',
+      userName: name,
+      image: imageUrl,
+    }
+    client.createIfNotExists(doc)
+      .then(() => {
+        console.log('promise')
+        navigate('/', {replace:true})
+      })
   }
     return (
       <div className='flex justify-start items-center flex-col h-screen'>
