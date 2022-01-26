@@ -5,7 +5,7 @@
     "dataset": "production"
   },
   "project": {
-    "name": "shareme_jsm"
+    "name": "shareme"
   },
   "plugins": [
     "@sanity/base",
