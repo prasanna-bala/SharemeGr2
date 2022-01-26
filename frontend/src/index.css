@@ -1,15 +1,13 @@
  @tailwind base;
  @tailwind component;
  @tailwind utilities;
-
- body {
-
+@layer base {
+   body {
    font-family: 'Lato';
-
  }
+}
+
 
  .hide-scrollbar::-webkit-scrollbar{
-
-   display: none;
-   
+  display: none; 
  }
