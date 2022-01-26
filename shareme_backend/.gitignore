@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+/plugins
+/static
+/config
+
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+sanity.json
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
