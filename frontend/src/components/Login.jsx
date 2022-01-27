@@ -8,9 +8,10 @@ import { client } from '../client';
 
 const Login = ()=>{
   const navigate = useNavigate();
-  const responseGoogle = (response) => {
+  const responseGoogle = (response) => 
+  {
     localStorage.setItem('user', JSON.stringify(response.profileObj))
-    console.log(response.profileObj)
+    console.log(response.profileObj);
     const {name, googleId, imageUrl} = response.profileObj;
     const doc = {
       _id: googleId,
@@ -22,7 +23,7 @@ const Login = ()=>{
       .then(() => {
         console.log('promise')
         navigate('/', {replace:true})
-      })
+      }) 
   }
     return (
       <div className='flex justify-start items-center flex-col h-screen'>
@@ -42,7 +43,8 @@ const Login = ()=>{
                 </div>
                 <div className='shadow-2xl'>
                   <GoogleLogin 
-                    clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
+                      clientId= {  process.env.REACT_APP_GOOGLE_API_TOKEN}
+                 //   clientId={'585747975697-vt89o1a0k5qo745riu3dl3lo8a4qculk.apps.googleusercontent.com'}
                     render={(renderProps) =>(
                       <button 
                         type='button' 
