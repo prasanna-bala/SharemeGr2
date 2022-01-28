@@ -14,7 +14,7 @@ const Feed = () => {
         useEffect(() => {
          
             if(categoryId) {
-                   setLoading(true);
+                setLoading(true);
                 const query = searchQuery(categoryId);
                 client.fetch(query)
                     .then((data) => {
@@ -30,7 +30,7 @@ const Feed = () => {
                 });
             }
         }, [categoryId]);
-        const  ideaName = categoryId || 'new';
+        // const  ideaName = categoryId || 'new';
 
         if (loading) return <Spinner message = 'we are adding new ideas  to your feed ! ' /> ;
             
