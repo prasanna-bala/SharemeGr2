@@ -3,7 +3,7 @@
 /plugins
 /static
 /config
-
+/sanity
 
 # testing
 /coverage

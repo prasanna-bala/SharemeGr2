@@ -5,36 +5,46 @@ import { v4 as uuidv4 } from 'uuid';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
-import { fetchUser } from '../utils/fetchUser';
 
-const Pin = ({pin:{postedBy, image, _id, destination, save}}) => {
-  const [postHovered, setPostHovered] = useState(false);
-  const [savingPost, setSavingPost] = useState(false);
-  const navigate = useNavigate;
-  const user = fetchUser();
 
-  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.googleId))?.length;
-  const savePin = (id) => {
-    if(!alreadySaved) {
-      setSavingPost(true);
-      client
-        .patch(id)
-        .setIfMissing({save:[]})
-        .insert('after', 'save[-1]', [{
-          _key: uuidv4(),
-          userId: user.googleId,
-          postedBy: {
-            _type: 'postedBy',
-            _ref: user.googleId,
-          }
-        }])
-        .commit()
-        .then(() => {
-          window.location.reload();
-          setSavingPost(false);
-        })
+  const Pin = ({pin}) => {
+    const [postHovered, setPostHovered] = useState(false);
+    const [savingPost, setSavingPost] = useState(false);
+    const navigate = useNavigate();
+    const {postedBy,image,_id,destination}=pin;
+    const user = localStorage.getItem('user')!== 'undefined'?JSON.parse(localStorage.getItem('user')):localStorage.clear();
+    let  alreadySaved = pin?.save?.filter((item) => item?.postedBy?._id === user?.googleId);
+    alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
-    }
+    const savePin = (id) => {
+      if(alreadySaved?.length === 0) {
+        setSavingPost(true);
+        client
+          .patch(id)
+          .setIfMissing({save:[]})
+          .insert('after', 'save[-1]', [{
+            _key: uuidv4(),
+            userId: user?.googleId,
+            postedBy: {
+              _type: 'postedBy',
+              _ref: user?.googleId,
+            }
+          }])
+          .commit()
+          .then(() => {
+            window.location.reload();
+            setSavingPost(false);
+          })
+
+      }
+  }
+
+  const deletePin = (id) => {
+    client
+      .delete(id)
+      .then(() => {
+        window.location.reload();
+      });
   }
 
   return( 
@@ -61,9 +71,9 @@ const Pin = ({pin:{postedBy, image, _id, destination, save}}) => {
                   <MdDownloadForOffline />
                 </a>
               </div>
-              {alreadySaved ? (
+              {alreadySaved?.length !== 0 ? (
                 <button type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined outline-none'>
-                  {save?.length} Saved
+                  {pin?.save?.length} Saved
                 </button>
               ) : (
                 <button 
@@ -73,8 +83,8 @@ const Pin = ({pin:{postedBy, image, _id, destination, save}}) => {
                   }}
                   type='button' 
                   className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined outline-none'>
-                  Save
-                  {/* {savingPost ? 'Saving' : 'Save'} */}
+               
+                  {pin?.save?.length} {savingPost ? 'Saving' : 'Save'} 
                 </button>
               )}
             </div>
@@ -90,10 +100,24 @@ const Pin = ({pin:{postedBy, image, _id, destination, save}}) => {
                   {destination.length > 20 ? destination.slice(8, 20) : destination.slice(8)}
                 </a>
               )}
+              { postedBy?._id === user.googleId && (
+                <button 
+                  type="button" 
+                  onClick={(e)=> {
+                    e.stopPropagation();
+                    deletePin(_id);
+                  }} className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"> 
+                  <AiTwotoneDelete />
+                </button>
+              )}
             </div>
           </div>
         )}
         </div>
+        <Link to={`user-profile/${user?._id}`} className='flex gap-2 mt-2 items-center'>
+            <img className='w-8 h-8 rounded-full object-cover' src={postedBy?.image} alt='user-profile' />
+            <p className='font-semibold capitalize'>{postedBy?.userName}</p>
+        </Link>
       </div>
     )
 };
