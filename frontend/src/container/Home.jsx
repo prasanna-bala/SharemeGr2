@@ -1,21 +1,22 @@
-import React ,{ useState,useRef, useEffect} from 'react';
+import React ,{ useState, useRef, useEffect} from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { Link,Route,Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
-import {Sidebar,UserProfile} from '../components/';
+import {Sidebar, UserProfile} from '../components/';
 import { client } from '../client';
 import logo from '../asset/logo.png'
 import Pins from './Pins';
 import { userQuery } from '../utils/data';
-import { fetchUser } from '../utils/fetchUser';
+
 
 const Home = ()=>{
 
     const [toggleSidebar, setToggleSidebar ] = useState(false);
-    const [user, setUser ] = useState(null);
+    const [user, setUser ] = useState();
     const scrollRef = useRef(null);
-    const userInfo = fetchUser();
+    const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+   
     
     useEffect(() => {
         const query = userQuery(userInfo?.googleId);
@@ -43,7 +44,7 @@ const Home = ()=>{
                         <img src={logo} alt='logo' className='w-28' />
                     </Link>
                     <Link to={`user-profile/${user?._id}`}>
-                        <img src={user?.image} alt='user.logo' className='w-9 h-9 rounded-full' />
+                        <img src={user?.image} alt='user-pic' className='w-9 h-9 rounded-full' />
                     </Link>
                 </div>
                 {toggleSidebar && (
