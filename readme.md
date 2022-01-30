@@ -1,2 +1,9 @@
-
-![image](https://user-images.githubusercontent.com/94684396/151580666-fdb2e030-f416-46b8-9e01-690a5a1fc719.png)
+# Brief ShareMe
+    create a social network with react
+    Use tutorial by Javascript Mastery
+## Technologies use:
+    - React (frontend)
+    - Sanity (backend no-code)
+    - Tailwind (css)
+    - Console Google Cloud (authentification)
+    - Netlify ( deployment)
