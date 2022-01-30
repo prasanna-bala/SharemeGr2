@@ -65,4 +65,37 @@ create components sidebar and navbar and link sidebar in page Home
 ## feed
 create component feed and spinner
 import the layout masonry for the images
-import spinner for chargement of more images
+import spinner for chargement of more images and if no image
+
+## Pin
+    in image, add button save, button delete, link description and button upload
+
+## CreatePin
+    add as a form for add a new pin with: 
+        - place where click for add image in upload
+        - input for add title
+        - input for add about
+        - input for add ddescription / link
+        - select for category
+        - button for save the pin
+    
+## PinDetail
+    When click in the pin,
+    see all informations of the pine :
+        - in top: the image
+        - the button for download at left and at right the link or description
+        - the title and about 
+        - the user who added the pin
+        - add component comment:
+            - attach input for add comment
+            - the user who added a comment
+
+## UserProfile
+    attach all informations for a user
+        - add a banner with a image of the user, the name of the user
+        - attach pins than the user added
+    the user of this profile can delete an image he has added
+
+## search
+    - add the functionnality of search a pin
+    - can search pin letter by letter
