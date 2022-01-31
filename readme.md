@@ -16,6 +16,6 @@
     - Tailwind (css)
     - Console Google Cloud (authentification)
     - Netlify ( deployment)
-    What was used to build the application?
+ 
 
  
