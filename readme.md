@@ -8,7 +8,7 @@
 
 # Is the application available in Internet?
 
-yes t. It will be deployed on  https://sharemegr-prasanna.netlify.app/ .
+    -yes t. It will be deployed on  https://sharemegr-prasanna.netlify.app/ .
 
 ## Following frameworks, libraries, technologies and tools were used:
     - React (frontend)
